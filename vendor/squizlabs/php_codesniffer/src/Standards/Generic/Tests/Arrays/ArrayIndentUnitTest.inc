@@ -1,4 +1,5 @@
 <?php
+
 $var = [1,2,3];
 $var = [
     1,
@@ -33,7 +34,7 @@ $var = [
     ];
 
 $var = array(
-    'one' => function() {
+    'one' => function () {
         $foo = [1,2,3];
         $bar = [
             1,
@@ -90,12 +91,16 @@ $var = [
 // phpcs:set Generic.Arrays.ArrayIndent indent 4
 
 $array = array(
-    match ($test) { 1 => 'a', 2 => 'b' }
+    match ($test) {
+    1 => 'a', 2 => 'b'
+    }
           => 'dynamic keys, woho!',
 );
 
 $array = [
-  match ($test) { 1 => 'a', 2 => 'b' }
+  match ($test) {
+    1 => 'a', 2 => 'b'
+  }
        => 'dynamic keys, woho!',
 ];
 
@@ -108,8 +113,8 @@ $array = [
 
 $array = [
   functionCall(
-    name: $value
-    ),
+      name: $value
+  ),
 ];
 
 // phpcs:set Generic.Arrays.ArrayIndent indent 1
@@ -118,14 +123,14 @@ $array = [
  $var =
 [
  1 => 'one',
-];
+ ];
 
 // Testing pluralization of indent text - array item indent.
-$var = [
+ $var = [
  1 => 'one',
       2 => 'two',
     /* three */ 3 => 'three',
-];
+ ];
 
 // Testing pluralization of indent text - close brace indent.
  $var = [
@@ -137,18 +142,18 @@ $var = [
 // No test for open brace indent as that is _minimum_ and any actual value will be 0 or more, so with indent 0, this will never yield an error.
 
 // Testing pluralization of indent text - array item indent.
-$var = [
+ $var = [
  1 => 'one',
       2 => 'two',
     /* three */ 3 => 'three',
-];
+ ];
 
 // Testing pluralization of indent text - close brace indent.
-$var = [
-1 => 'one',
+ $var = [
+ 1 => 'one',
   ];
 
 // phpcs:set Generic.Arrays.ArrayIndent indent 4
 
-$array = [1,
-];
+ $array = [1,
+ ];

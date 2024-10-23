@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Ensures there is a single space after a NOT operator.
  *
@@ -15,7 +16,6 @@ use PHP_CodeSniffer\Util\Tokens;
 
 class SpaceAfterNotSniff implements Sniff
 {
-
     /**
      * A list of tokenizers this sniff supports.
      *
@@ -49,7 +49,6 @@ class SpaceAfterNotSniff implements Sniff
     public function register()
     {
         return [T_BOOLEAN_NOT];
-
     }//end register()
 
 
@@ -76,7 +75,8 @@ class SpaceAfterNotSniff implements Sniff
             return;
         }
 
-        if ($this->ignoreNewlines === true
+        if (
+            $this->ignoreNewlines === true
             && $tokens[$stackPtr]['line'] !== $tokens[$nextNonEmpty]['line']
         ) {
             return;
@@ -100,7 +100,7 @@ class SpaceAfterNotSniff implements Sniff
         $found = 0;
         if ($tokens[$stackPtr]['line'] !== $tokens[$nextNonEmpty]['line']) {
             $found = 'newline';
-        } else if ($tokens[($stackPtr + 1)]['code'] === T_WHITESPACE) {
+        } elseif ($tokens[($stackPtr + 1)]['code'] === T_WHITESPACE) {
             $found = $tokens[($stackPtr + 1)]['length'];
         }
 
@@ -136,8 +136,5 @@ class SpaceAfterNotSniff implements Sniff
                 $phpcsFile->fixer->endChangeset();
             }
         }
-
     }//end process()
-
-
 }//end class

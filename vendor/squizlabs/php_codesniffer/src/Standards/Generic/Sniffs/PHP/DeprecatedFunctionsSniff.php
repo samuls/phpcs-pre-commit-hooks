@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Discourages the use of deprecated PHP functions.
  *
@@ -14,7 +15,6 @@ use ReflectionFunction;
 
 class DeprecatedFunctionsSniff extends ForbiddenFunctionsSniff
 {
-
     /**
      * A list of forbidden functions with their alternatives.
      *
@@ -42,7 +42,6 @@ class DeprecatedFunctionsSniff extends ForbiddenFunctionsSniff
                 $this->forbiddenFunctions[$functionName] = null;
             }
         }
-
     }//end __construct()
 
 
@@ -57,7 +56,7 @@ class DeprecatedFunctionsSniff extends ForbiddenFunctionsSniff
      *
      * @return void
      */
-    protected function addError($phpcsFile, $stackPtr, $function, $pattern=null)
+    protected function addError($phpcsFile, $stackPtr, $function, $pattern = null)
     {
         $data  = [$function];
         $error = 'Function %s() has been deprecated';
@@ -68,8 +67,5 @@ class DeprecatedFunctionsSniff extends ForbiddenFunctionsSniff
         } else {
             $phpcsFile->addWarning($error, $stackPtr, $type, $data);
         }
-
     }//end addError()
-
-
 }//end class

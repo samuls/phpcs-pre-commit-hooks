@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Runs csslint on the file.
  *
@@ -18,7 +19,6 @@ use PHP_CodeSniffer\Util\Common;
 
 class CSSLintSniff implements Sniff
 {
-
     /**
      * A list of tokenizers this sniff supports.
      *
@@ -35,7 +35,6 @@ class CSSLintSniff implements Sniff
     public function register()
     {
         return [T_OPEN_TAG];
-
     }//end register()
 
 
@@ -57,7 +56,7 @@ class CSSLintSniff implements Sniff
 
         $fileName = $phpcsFile->getFilename();
 
-        $cmd = Common::escapeshellcmd($csslintPath).' '.escapeshellarg($fileName).' 2>&1';
+        $cmd = Common::escapeshellcmd($csslintPath) . ' ' . escapeshellarg($fileName) . ' 2>&1';
         exec($cmd, $output, $retval);
 
         if (is_array($output) === false) {
@@ -79,7 +78,7 @@ class CSSLintSniff implements Sniff
             }
 
             $line    = (int) $matches[2];
-            $message = 'csslint says: '.$output[($i + 1)];
+            $message = 'csslint says: ' . $output[($i + 1)];
             // First line is message with error line and error code.
             // Second is error message.
             // Third is wrong line in file.
@@ -91,8 +90,5 @@ class CSSLintSniff implements Sniff
 
         // Ignore the rest of the file.
         return $phpcsFile->numTokens;
-
     }//end process()
-
-
 }//end class

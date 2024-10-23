@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Tests that the correct Subversion properties are set.
  *
@@ -15,7 +16,6 @@ use PHP_CodeSniffer\Sniffs\Sniff;
 
 class SubversionPropertiesSniff implements Sniff
 {
-
     /**
      * The Subversion properties that should be set.
      *
@@ -39,7 +39,6 @@ class SubversionPropertiesSniff implements Sniff
     public function register()
     {
         return [T_OPEN_TAG];
-
     }//end register()
 
 
@@ -63,7 +62,8 @@ class SubversionPropertiesSniff implements Sniff
 
         $allProperties = ($properties + $this->properties);
         foreach ($allProperties as $key => $value) {
-            if (isset($properties[$key]) === true
+            if (
+                isset($properties[$key]) === true
                 && isset($this->properties[$key]) === false
             ) {
                 $error = 'Unexpected Subversion property "%s" = "%s"';
@@ -75,7 +75,8 @@ class SubversionPropertiesSniff implements Sniff
                 continue;
             }
 
-            if (isset($properties[$key]) === false
+            if (
+                isset($properties[$key]) === false
                 && isset($this->properties[$key]) === true
             ) {
                 $error = 'Missing Subversion property "%s" = "%s"';
@@ -87,7 +88,8 @@ class SubversionPropertiesSniff implements Sniff
                 continue;
             }
 
-            if ($properties[$key] !== null
+            if (
+                $properties[$key] !== null
                 && $properties[$key] !== $this->properties[$key]
             ) {
                 $error = 'Subversion property "%s" = "%s" does not match "%s"';
@@ -102,7 +104,6 @@ class SubversionPropertiesSniff implements Sniff
 
         // Ignore the rest of the file.
         return $phpcsFile->numTokens;
-
     }//end process()
 
 
@@ -122,8 +123,8 @@ class SubversionPropertiesSniff implements Sniff
         $properties = [];
 
         $paths   = [];
-        $paths[] = dirname($path).'/.svn/props/'.basename($path).'.svn-work';
-        $paths[] = dirname($path).'/.svn/prop-base/'.basename($path).'.svn-base';
+        $paths[] = dirname($path) . '/.svn/props/' . basename($path) . '.svn-work';
+        $paths[] = dirname($path) . '/.svn/prop-base/' . basename($path) . '.svn-base';
 
         $foundPath = false;
         foreach ($paths as $path) {
@@ -179,8 +180,5 @@ class SubversionPropertiesSniff implements Sniff
         }
 
         return $properties;
-
     }//end getProperties()
-
-
 }//end class

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Represents a PHP_CodeSniffer sniff for sniffing coding standards.
  *
@@ -18,8 +19,6 @@ use PHP_CodeSniffer\Files\File;
 
 interface Sniff
 {
-
-
     /**
      * Registers the tokens that this sniff wants to listen for.
      *
@@ -75,6 +74,4 @@ interface Sniff
      *                  the rest of the file.
      */
     public function process(File $phpcsFile, $stackPtr);
-
-
 }//end interface

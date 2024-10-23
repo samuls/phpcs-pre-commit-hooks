@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Throws errors if tabs are used for indentation.
  *
@@ -14,7 +15,6 @@ use PHP_CodeSniffer\Sniffs\Sniff;
 
 class DisallowTabIndentSniff implements Sniff
 {
-
     /**
      * A list of tokenizers this sniff supports.
      *
@@ -45,7 +45,6 @@ class DisallowTabIndentSniff implements Sniff
             T_OPEN_TAG,
             T_OPEN_TAG_WITH_ECHO,
         ];
-
     }//end register()
 
 
@@ -100,7 +99,8 @@ class DisallowTabIndentSniff implements Sniff
             // If this is an inline HTML token or a subsequent line of a multi-line comment,
             // split off the indentation as that is the only part to take into account for the metrics.
             $indentation = $content;
-            if (($tokens[$i]['code'] === T_INLINE_HTML
+            if (
+                ($tokens[$i]['code'] === T_INLINE_HTML
                 || $tokens[$i]['code'] === T_COMMENT)
                 && preg_match('`^(\s*)\S.*`s', $content, $matches) > 0
             ) {
@@ -109,7 +109,8 @@ class DisallowTabIndentSniff implements Sniff
                 }
             }
 
-            if (($tokens[$i]['code'] === T_DOC_COMMENT_WHITESPACE
+            if (
+                ($tokens[$i]['code'] === T_DOC_COMMENT_WHITESPACE
                 || $tokens[$i]['code'] === T_COMMENT)
                 && $indentation === ' '
             ) {
@@ -118,7 +119,8 @@ class DisallowTabIndentSniff implements Sniff
             }
 
             $recordMetrics = true;
-            if ($content === $indentation
+            if (
+                $content === $indentation
                 && isset($tokens[($i + 1)]) === true
                 && $tokens[$i]['line'] < $tokens[($i + 1)]['line']
             ) {
@@ -137,9 +139,9 @@ class DisallowTabIndentSniff implements Sniff
 
                     if ($foundIndentTabs > 0 && $foundIndentSpaces === 0) {
                         $phpcsFile->recordMetric($i, 'Line indent', 'tabs');
-                    } else if ($foundIndentTabs === 0 && $foundIndentSpaces > 0) {
+                    } elseif ($foundIndentTabs === 0 && $foundIndentSpaces > 0) {
                         $phpcsFile->recordMetric($i, 'Line indent', 'spaces');
-                    } else if ($foundIndentTabs > 0 && $foundIndentSpaces > 0) {
+                    } elseif ($foundIndentTabs > 0 && $foundIndentSpaces > 0) {
                         $spacePosition  = strpos($indentation, ' ');
                         $tabAfterSpaces = strpos($indentation, "\t", $spacePosition);
                         if ($tabAfterSpaces !== false) {
@@ -173,7 +175,7 @@ class DisallowTabIndentSniff implements Sniff
             // Auto-fixing this would cause parse errors as the indentation of the heredoc/nowdoc contents
             // needs to use the same type of indentation. Also see: https://3v4l.org/7OF3M .
             if ($tokens[$i]['code'] === T_END_HEREDOC || $tokens[$i]['code'] === T_END_NOWDOC) {
-                $phpcsFile->addError($error, $i, $errorCode.'HeredocCloser');
+                $phpcsFile->addError($error, $i, $errorCode . 'HeredocCloser');
                 continue;
             }
 
@@ -193,8 +195,5 @@ class DisallowTabIndentSniff implements Sniff
 
         // Ignore the rest of the file.
         return $phpcsFile->numTokens;
-
     }//end process()
-
-
 }//end class

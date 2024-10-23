@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Checks that end of line characters are correct.
  *
@@ -14,7 +15,6 @@ use PHP_CodeSniffer\Sniffs\Sniff;
 
 class LineEndingsSniff implements Sniff
 {
-
     /**
      * A list of tokenizers this sniff supports.
      *
@@ -45,7 +45,6 @@ class LineEndingsSniff implements Sniff
             T_OPEN_TAG,
             T_OPEN_TAG_WITH_ECHO,
         ];
-
     }//end register()
 
 
@@ -76,7 +75,8 @@ class LineEndingsSniff implements Sniff
         if ($found === '\n') {
             $tokens    = $phpcsFile->getTokens();
             $lastToken = ($phpcsFile->numTokens - 1);
-            if ($tokens[$lastToken]['line'] === 1
+            if (
+                $tokens[$lastToken]['line'] === 1
                 && $tokens[$lastToken]['content'] !== "\n"
             ) {
                 return $phpcsFile->numTokens;
@@ -98,22 +98,23 @@ class LineEndingsSniff implements Sniff
         if ($fix === true) {
             $tokens = $phpcsFile->getTokens();
             switch ($this->eolChar) {
-            case '\n':
-                $eolChar = "\n";
-                break;
-            case '\r':
-                $eolChar = "\r";
-                break;
-            case '\r\n':
-                $eolChar = "\r\n";
-                break;
-            default:
-                $eolChar = $this->eolChar;
-                break;
+                case '\n':
+                    $eolChar = "\n";
+                    break;
+                case '\r':
+                    $eolChar = "\r";
+                    break;
+                case '\r\n':
+                    $eolChar = "\r\n";
+                    break;
+                default:
+                    $eolChar = $this->eolChar;
+                    break;
             }
 
             for ($i = 0; $i < $phpcsFile->numTokens; $i++) {
-                if (isset($tokens[($i + 1)]) === true
+                if (
+                    isset($tokens[($i + 1)]) === true
                     && $tokens[($i + 1)]['line'] <= $tokens[$i]['line']
                 ) {
                     continue;
@@ -141,8 +142,5 @@ class LineEndingsSniff implements Sniff
 
         // Ignore the rest of the file.
         return $phpcsFile->numTokens;
-
     }//end process()
-
-
 }//end class

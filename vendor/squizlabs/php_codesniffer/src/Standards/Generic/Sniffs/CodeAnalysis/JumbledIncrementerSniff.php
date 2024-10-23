@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Detects incrementer jumbling in for loops.
  *
@@ -34,8 +35,6 @@ use PHP_CodeSniffer\Sniffs\Sniff;
 
 class JumbledIncrementerSniff implements Sniff
 {
-
-
     /**
      * Registers the tokens that this sniff wants to listen for.
      *
@@ -44,7 +43,6 @@ class JumbledIncrementerSniff implements Sniff
     public function register()
     {
         return [T_FOR];
-
     }//end register()
 
 
@@ -93,7 +91,6 @@ class JumbledIncrementerSniff implements Sniff
                 $phpcsFile->addWarning($error, $stackPtr, 'Found', $data);
             }
         }
-
     }//end process()
 
 
@@ -121,14 +118,11 @@ class JumbledIncrementerSniff implements Sniff
             $code = $tokens[$next]['code'];
             if ($code === T_SEMICOLON) {
                 ++$semicolons;
-            } else if ($semicolons === 2 && $code === T_VARIABLE) {
+            } elseif ($semicolons === 2 && $code === T_VARIABLE) {
                 $incrementers[] = $tokens[$next]['content'];
             }
         }
 
         return $incrementers;
-
     }//end findIncrementers()
-
-
 }//end class

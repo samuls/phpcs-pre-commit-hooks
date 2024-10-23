@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Ban the use of Yoda conditions.
  *
@@ -16,8 +17,6 @@ use PHP_CodeSniffer\Util\Tokens;
 
 class DisallowYodaConditionsSniff implements Sniff
 {
-
-
     /**
      * Returns an array of tokens this test wants to listen for.
      *
@@ -29,7 +28,6 @@ class DisallowYodaConditionsSniff implements Sniff
         unset($tokens[T_COALESCE]);
 
         return $tokens;
-
     }//end register()
 
 
@@ -110,7 +108,8 @@ class DisallowYodaConditionsSniff implements Sniff
                 if ($prev === false) {
                     return;
                 }
-            } else if ($tokens[$beforeOpeningParenthesisIndex]['code'] === T_ARRAY
+            } elseif (
+                $tokens[$beforeOpeningParenthesisIndex]['code'] === T_ARRAY
                 && $this->isArrayStatic($phpcsFile, $beforeOpeningParenthesisIndex) === false
             ) {
                 return;
@@ -122,7 +121,6 @@ class DisallowYodaConditionsSniff implements Sniff
             $stackPtr,
             'Found'
         );
-
     }//end process()
 
 
@@ -141,7 +139,7 @@ class DisallowYodaConditionsSniff implements Sniff
         if ($tokens[$arrayToken]['code'] === T_OPEN_SHORT_ARRAY) {
             $start = $arrayToken;
             $end   = $tokens[$arrayToken]['bracket_closer'];
-        } else if ($tokens[$arrayToken]['code'] === T_ARRAY) {
+        } elseif ($tokens[$arrayToken]['code'] === T_ARRAY) {
             $start = $tokens[$arrayToken]['parenthesis_opener'];
             $end   = $tokens[$arrayToken]['parenthesis_closer'];
         } else {
@@ -178,8 +176,5 @@ class DisallowYodaConditionsSniff implements Sniff
         }
 
         return true;
-
     }//end isArrayStatic()
-
-
 }//end class

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Runs eslint on the file.
  *
@@ -18,7 +19,6 @@ use PHP_CodeSniffer\Util\Common;
 
 class ESLintSniff implements Sniff
 {
-
     /**
      * A list of tokenizers this sniff supports.
      *
@@ -42,7 +42,6 @@ class ESLintSniff implements Sniff
     public function register()
     {
         return [T_OPEN_TAG];
-
     }//end register()
 
 
@@ -76,10 +75,10 @@ class ESLintSniff implements Sniff
 
         $eslintOptions = ['--format json'];
         if (empty($configFile) === false) {
-            $eslintOptions[] = '--config '.escapeshellarg($configFile);
+            $eslintOptions[] = '--config ' . escapeshellarg($configFile);
         }
 
-        $cmd = Common::escapeshellcmd(escapeshellarg($eslintPath).' '.implode(' ', $eslintOptions).' '.escapeshellarg($filename));
+        $cmd = Common::escapeshellcmd(escapeshellarg($eslintPath) . ' ' . implode(' ', $eslintOptions) . ' ' . escapeshellarg($filename));
 
         // Execute!
         exec($cmd, $stdout, $code);
@@ -98,7 +97,7 @@ class ESLintSniff implements Sniff
         // Data is a list of files, but we only pass a single one.
         $messages = $data[0]->messages;
         foreach ($messages as $error) {
-            $message = 'eslint says: '.$error->message;
+            $message = 'eslint says: ' . $error->message;
             if (empty($error->fatal) === false || $error->severity === 2) {
                 $phpcsFile->addErrorOnLine($message, $error->line, 'ExternalTool');
             } else {
@@ -108,8 +107,5 @@ class ESLintSniff implements Sniff
 
         // Ignore the rest of the file.
         return $phpcsFile->numTokens;
-
     }//end process()
-
-
 }//end class
