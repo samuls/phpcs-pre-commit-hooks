@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Checks that the opening brace of a class/interface/trait is on the same line as the class declaration.
  *
@@ -14,8 +15,6 @@ use PHP_CodeSniffer\Sniffs\Sniff;
 
 class OpeningBraceSameLineSniff implements Sniff
 {
-
-
     /**
      * Returns an array of tokens this test wants to listen for.
      *
@@ -29,7 +28,6 @@ class OpeningBraceSameLineSniff implements Sniff
             T_TRAIT,
             T_ENUM,
         ];
-
     }//end register()
 
 
@@ -46,7 +44,7 @@ class OpeningBraceSameLineSniff implements Sniff
     {
         $tokens          = $phpcsFile->getTokens();
         $scopeIdentifier = $phpcsFile->findNext(T_STRING, ($stackPtr + 1));
-        $errorData       = [strtolower($tokens[$stackPtr]['content']).' '.$tokens[$scopeIdentifier]['content']];
+        $errorData       = [strtolower($tokens[$stackPtr]['content']) . ' ' . $tokens[$scopeIdentifier]['content']];
 
         if (isset($tokens[$stackPtr]['scope_opener']) === false) {
             $error = 'Possible parse error: %s missing opening or closing brace';
@@ -99,7 +97,7 @@ class OpeningBraceSameLineSniff implements Sniff
         // Is there precisely one space before the opening brace ?
         if ($tokens[($openingBrace - 1)]['code'] !== T_WHITESPACE) {
             $length = 0;
-        } else if ($tokens[($openingBrace - 1)]['content'] === "\t") {
+        } elseif ($tokens[($openingBrace - 1)]['content'] === "\t") {
             $length = '\t';
         } else {
             $length = $tokens[($openingBrace - 1)]['length'];
@@ -117,8 +115,5 @@ class OpeningBraceSameLineSniff implements Sniff
                 }
             }
         }
-
     }//end process()
-
-
 }//end class

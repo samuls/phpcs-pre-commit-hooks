@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Checks that abstract classes are prefixed by Abstract.
  *
@@ -13,8 +14,6 @@ use PHP_CodeSniffer\Sniffs\Sniff;
 
 class AbstractClassNamePrefixSniff implements Sniff
 {
-
-
     /**
      * Registers the tokens that this sniff wants to listen for.
      *
@@ -23,7 +22,6 @@ class AbstractClassNamePrefixSniff implements Sniff
     public function register()
     {
         return [T_CLASS];
-
     }//end register()
 
 
@@ -53,8 +51,5 @@ class AbstractClassNamePrefixSniff implements Sniff
         if (strtolower($prefix) !== 'abstract') {
             $phpcsFile->addError('Abstract class names must be prefixed with "Abstract"; found "%s"', $stackPtr, 'Missing', [$className]);
         }
-
     }//end process()
-
-
 }//end class

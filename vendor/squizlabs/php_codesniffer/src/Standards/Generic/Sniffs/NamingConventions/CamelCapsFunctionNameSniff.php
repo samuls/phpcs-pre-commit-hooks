@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Ensures method and functions are named correctly.
  *
@@ -16,7 +17,6 @@ use PHP_CodeSniffer\Util\Tokens;
 
 class CamelCapsFunctionNameSniff extends AbstractScopeSniff
 {
-
     /**
      * A list of all PHP magic methods.
      *
@@ -85,7 +85,6 @@ class CamelCapsFunctionNameSniff extends AbstractScopeSniff
     public function __construct()
     {
         parent::__construct(Tokens::$ooScopeTokens, [T_FUNCTION], true);
-
     }//end __construct()
 
 
@@ -122,7 +121,7 @@ class CamelCapsFunctionNameSniff extends AbstractScopeSniff
             $className = '[Anonymous Class]';
         }
 
-        $errorData = [$className.'::'.$methodName];
+        $errorData = [$className . '::' . $methodName];
 
         $methodNameLc = strtolower($methodName);
         $classNameLc  = strtolower($className);
@@ -130,7 +129,8 @@ class CamelCapsFunctionNameSniff extends AbstractScopeSniff
         // Is this a magic method. i.e., is prefixed with "__" ?
         if (preg_match('|^__[^_]|', $methodName) !== 0) {
             $magicPart = substr($methodNameLc, 2);
-            if (isset($this->magicMethods[$magicPart]) === true
+            if (
+                isset($this->magicMethods[$magicPart]) === true
                 || isset($this->methodsDoubleUnderscore[$magicPart]) === true
             ) {
                 return;
@@ -146,7 +146,7 @@ class CamelCapsFunctionNameSniff extends AbstractScopeSniff
         }
 
         // PHP4 destructors are allowed to break our rules.
-        if ($methodNameLc === '_'.$classNameLc) {
+        if ($methodNameLc === '_' . $classNameLc) {
             return;
         }
 
@@ -172,7 +172,6 @@ class CamelCapsFunctionNameSniff extends AbstractScopeSniff
         } else {
             $phpcsFile->recordMetric($stackPtr, 'CamelCase method name', 'yes');
         }
-
     }//end processTokenWithinScope()
 
 
@@ -216,8 +215,5 @@ class CamelCapsFunctionNameSniff extends AbstractScopeSniff
         } else {
             $phpcsFile->recordMetric($stackPtr, 'CamelCase method name', 'yes');
         }
-
     }//end processTokenOutsideScope()
-
-
 }//end class

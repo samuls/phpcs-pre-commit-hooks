@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Warns about TODO comments.
  *
@@ -15,7 +16,6 @@ use PHP_CodeSniffer\Util\Tokens;
 
 class TodoSniff implements Sniff
 {
-
     /**
      * A list of tokenizers this sniff supports.
      *
@@ -35,7 +35,6 @@ class TodoSniff implements Sniff
     public function register()
     {
         return array_diff(Tokens::$commentTokens, Tokens::$phpcsCommentTokens);
-
     }//end register()
 
 
@@ -70,8 +69,5 @@ class TodoSniff implements Sniff
 
             $phpcsFile->addWarning($error, $stackPtr, $type, $data);
         }
-
     }//end process()
-
-
 }//end class

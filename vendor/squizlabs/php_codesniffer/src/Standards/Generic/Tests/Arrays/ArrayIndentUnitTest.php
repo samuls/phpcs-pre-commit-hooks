@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Unit test class for the ArrayIndent sniff.
  *
@@ -18,8 +19,6 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
  */
 final class ArrayIndentUnitTest extends AbstractSniffUnitTest
 {
-
-
     /**
      * Returns the lines where errors should occur.
      *
@@ -59,7 +58,6 @@ final class ArrayIndentUnitTest extends AbstractSniffUnitTest
             143 => 1,
             149 => 1,
         ];
-
     }//end getErrorList()
 
 
@@ -74,8 +72,5 @@ final class ArrayIndentUnitTest extends AbstractSniffUnitTest
     public function getWarningList()
     {
         return [];
-
     }//end getWarningList()
-
-
 }//end class

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Bans the use of the PHP short array syntax.
  *
@@ -14,8 +15,6 @@ use PHP_CodeSniffer\Sniffs\Sniff;
 
 class DisallowShortArraySyntaxSniff implements Sniff
 {
-
-
     /**
      * Registers the tokens that this sniff wants to listen for.
      *
@@ -24,7 +23,6 @@ class DisallowShortArraySyntaxSniff implements Sniff
     public function register()
     {
         return [T_OPEN_SHORT_ARRAY];
-
     }//end register()
 
 
@@ -54,8 +52,5 @@ class DisallowShortArraySyntaxSniff implements Sniff
             $phpcsFile->fixer->replaceToken($closer, ')');
             $phpcsFile->fixer->endChangeset();
         }
-
     }//end process()
-
-
 }//end class

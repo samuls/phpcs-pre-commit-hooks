@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Forbid mixing different binary boolean operators within a single expression without making precedence
  * clear using parentheses.
@@ -35,7 +36,6 @@ use PHP_CodeSniffer\Util\Tokens;
 
 class RequireExplicitBooleanOperatorPrecedenceSniff implements Sniff
 {
-
     /**
      * Array of tokens this test searches for to find either a boolean
      * operator or the start of the current (sub-)expression. Used for
@@ -59,7 +59,6 @@ class RequireExplicitBooleanOperatorPrecedenceSniff implements Sniff
         $this->searchTargets[T_INLINE_ELSE] = T_INLINE_ELSE;
 
         return Tokens::$booleanOperators;
-
     }//end register()
 
 
@@ -112,8 +111,5 @@ class RequireExplicitBooleanOperatorPrecedenceSniff implements Sniff
         $error  = 'Mixing different binary boolean operators within an expression';
         $error .= ' without using parentheses to clarify precedence is not allowed.';
         $phpcsFile->addError($error, $stackPtr, 'MissingParentheses');
-
     }//end process()
-
-
 }//end class

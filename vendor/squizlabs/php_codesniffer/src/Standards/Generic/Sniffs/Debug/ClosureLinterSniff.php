@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Runs gjslint on the file.
  *
@@ -18,7 +19,6 @@ use PHP_CodeSniffer\Util\Common;
 
 class ClosureLinterSniff implements Sniff
 {
-
     /**
      * A list of error codes that should show errors.
      *
@@ -51,7 +51,6 @@ class ClosureLinterSniff implements Sniff
     public function register()
     {
         return [T_OPEN_TAG];
-
     }//end register()
 
 
@@ -75,7 +74,7 @@ class ClosureLinterSniff implements Sniff
         $fileName = $phpcsFile->getFilename();
 
         $lintPath = Common::escapeshellcmd($lintPath);
-        $cmd      = $lintPath.' --nosummary --notime --unix_mode '.escapeshellarg($fileName);
+        $cmd      = $lintPath . ' --nosummary --notime --unix_mode ' . escapeshellarg($fileName);
         exec($cmd, $output, $retval);
 
         if (is_array($output) === false) {
@@ -112,8 +111,5 @@ class ClosureLinterSniff implements Sniff
 
         // Ignore the rest of the file.
         return $phpcsFile->numTokens;
-
     }//end process()
-
-
 }//end class

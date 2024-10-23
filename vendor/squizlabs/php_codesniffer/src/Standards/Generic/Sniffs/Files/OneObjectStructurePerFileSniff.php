@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Checks that only one object structure is declared per file.
  *
@@ -14,8 +15,6 @@ use PHP_CodeSniffer\Sniffs\Sniff;
 
 class OneObjectStructurePerFileSniff implements Sniff
 {
-
-
     /**
      * Returns an array of tokens this test wants to listen for.
      *
@@ -29,7 +28,6 @@ class OneObjectStructurePerFileSniff implements Sniff
             T_TRAIT,
             T_ENUM,
         ];
-
     }//end register()
 
 
@@ -55,8 +53,5 @@ class OneObjectStructurePerFileSniff implements Sniff
             $error = 'Only one object structure is allowed in a file';
             $phpcsFile->addError($error, $nextClass, 'MultipleFound');
         }
-
     }//end process()
-
-
 }//end class

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Detects for-loops that use a function call in the test expression.
  *
@@ -32,8 +33,6 @@ use PHP_CodeSniffer\Util\Tokens;
 
 class ForLoopWithTestFunctionCallSniff implements Sniff
 {
-
-
     /**
      * Registers the tokens that this sniff wants to listen for.
      *
@@ -42,7 +41,6 @@ class ForLoopWithTestFunctionCallSniff implements Sniff
     public function register()
     {
         return [T_FOR];
-
     }//end register()
 
 
@@ -78,9 +76,9 @@ class ForLoopWithTestFunctionCallSniff implements Sniff
 
             if ($position < 1) {
                 continue;
-            } else if ($position > 1) {
+            } elseif ($position > 1) {
                 break;
-            } else if ($code !== T_VARIABLE && $code !== T_STRING) {
+            } elseif ($code !== T_VARIABLE && $code !== T_STRING) {
                 continue;
             }
 
@@ -94,8 +92,5 @@ class ForLoopWithTestFunctionCallSniff implements Sniff
                 break;
             }
         }//end for
-
     }//end process()
-
-
 }//end class
